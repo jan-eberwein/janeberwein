@@ -60,9 +60,9 @@ export async function sendContactMessage(prevState: any, formData: FormData) {
     // Send email using Resend
     // By default Resend allows sending to the registered account email using their onboarding domain.
     const { error } = await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>",
+      from: "janeberwein.at <onboarding@resend.dev>",
       to: "jan.janeberwein@gmail.com",
-      subject: `New Message from ${validatedData.name}`,
+      subject: `[janeberwein.at] New Message from ${validatedData.name}`,
       replyTo: validatedData.email,
       text: `Name: ${validatedData.name}\nEmail: ${validatedData.email}\nMessage:\n${validatedData.message}`,
     });
