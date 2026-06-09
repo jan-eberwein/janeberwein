@@ -3,17 +3,37 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { LiquidGlassCard } from "@/components/ui/LiquidGlassCard";
-import { Mail, Phone, Copy, Check } from "lucide-react";
-import { Instagram, Twitter, Github } from "@/components/ui/Icons";
+import { Mail, Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { useLanguage } from "@/components/i18n/LanguageContext";
+import Turnstile from "react-turnstile";
+import { sendContactMessage } from "@/app/actions/contact";
 
 export function ContactSection() {
-  const [copied, setCopied] = useState(false);
+  const { t } = useLanguage();
   const email = "jan@janeberwein.at";
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("loading");
+    const formData = new FormData(e.currentTarget);
+    
+    try {
+      const result = await sendContactMessage(null, formData);
+      if (result.success) {
+        setStatus("success");
+        e.currentTarget.reset();
+        setTimeout(() => setStatus("idle"), 5000);
+      } else {
+        setStatus("error");
+        // @ts-ignore
+        setErrorMsg(t.contact.form[result.error] || t.contact.form.errorMessage);
+      }
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(t.contact.form.errorMessage);
+    }
   };
 
   return (
@@ -23,47 +43,120 @@ export function ContactSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.7 }}
-        className="max-w-4xl mx-auto"
+        className="w-[95%] max-w-4xl mx-auto"
       >
-        <LiquidGlassCard className="p-8 md:p-12 text-center flex flex-col items-center">
-          <h2 className="text-3xl font-bold mb-4 tracking-tight">Let&apos;s build together.</h2>
-          <p className="text-foreground/70 mb-10 max-w-lg">
-            Whether you&apos;re a recruiter, potential client, or collaborator, I&apos;m always
-            open to discussing new projects and opportunities.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center gap-6 mb-12">
-            <button
-              onClick={handleCopyEmail}
-              className="flex items-center space-x-3 px-6 py-4 rounded-full bg-foreground text-background hover:scale-105 hover:bg-electric-blue hover:text-white hover:shadow-[0_0_20px_rgba(0,85,255,0.4)] transition-all duration-300"
-            >
-              <Mail size={20} />
-              <span className="font-medium">{email}</span>
-              {copied ? <Check size={18} className="text-green-400" /> : <Copy size={18} />}
-            </button>
-
-            <a
-              href="tel:+43000000000" // TODO: Add real phone number
-              className="flex items-center space-x-3 px-6 py-4 rounded-full border border-border liquid-glass hover:border-electric-blue/50 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300"
-            >
-              <Phone size={20} />
-              <span className="font-medium">+43 XXX XXX XXXX</span>
-            </a>
+        <LiquidGlassCard className="p-8 md:p-12">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold tracking-tight mb-8">{t.contact.title}</h2>
+            
+            {/* Mailto Button */}
+            <div className="flex justify-center mb-8">
+              <a
+                href={`mailto:${email}`}
+                className="flex items-center space-x-3 px-8 py-4 rounded-full bg-foreground text-background hover:scale-105 hover:bg-electric-blue hover:text-white hover:shadow-[0_0_20px_rgba(0,85,255,0.4)] transition-all duration-300"
+              >
+                <Mail size={20} />
+                <span className="font-bold">{email}</span>
+              </a>
+            </div>
           </div>
 
-          <div className="flex items-center space-x-8 text-foreground/60">
-            <a href="#" className="hover:text-electric-blue hover:scale-110 transition-all flex flex-col items-center space-y-2">
-              <Github size={24} />
-              <span className="text-xs font-medium">GitHub</span>
-            </a>
-            <a href="#" className="hover:text-electric-blue hover:scale-110 transition-all flex flex-col items-center space-y-2">
-              <Twitter size={24} />
-              <span className="text-xs font-medium">Twitter</span>
-            </a>
-            <a href="#" className="hover:text-electric-blue hover:scale-110 transition-all flex flex-col items-center space-y-2">
-              <Instagram size={24} />
-              <span className="text-xs font-medium">Instagram</span>
-            </a>
+          <div className="pt-10 border-t border-border/50">
+            {/* Form Side */}
+            <div className="w-full">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-bold text-foreground/80 mb-2">
+                      {t.contact.form.nameLabel}
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      disabled={status === "loading"}
+                      placeholder={t.contact.form.namePlaceholder}
+                      className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border/50 focus:border-electric-blue focus:ring-1 focus:ring-electric-blue outline-none transition-all disabled:opacity-50"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-bold text-foreground/80 mb-2">
+                      {t.contact.form.emailLabel}
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      disabled={status === "loading"}
+                      placeholder={t.contact.form.emailPlaceholder}
+                      className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border/50 focus:border-electric-blue focus:ring-1 focus:ring-electric-blue outline-none transition-all disabled:opacity-50"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-bold text-foreground/80 mb-2">
+                    {t.contact.form.messageLabel}
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows={5}
+                    disabled={status === "loading"}
+                    placeholder={t.contact.form.messagePlaceholder}
+                    className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border/50 focus:border-electric-blue focus:ring-1 focus:ring-electric-blue outline-none transition-all resize-none disabled:opacity-50"
+                  />
+                </div>
+
+                {/* Cloudflare Turnstile CAPTCHA */}
+                <div className="flex justify-center overflow-hidden rounded-lg">
+                  <Turnstile
+                    sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA"}
+                    theme="auto"
+                  />
+                </div>
+
+                {/* Status Messages */}
+                {status === "success" && (
+                  <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center justify-center space-x-3 text-green-500 bg-green-500/10 p-4 rounded-xl border border-green-500/20">
+                    <CheckCircle2 size={24} className="shrink-0" />
+                    <span className="text-sm font-bold">{t.contact.form.successMessage}</span>
+                  </motion.div>
+                )}
+
+                {status === "error" && (
+                  <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center justify-center space-x-3 text-red-500 bg-red-500/10 p-4 rounded-xl border border-red-500/20">
+                    <AlertCircle size={24} className="shrink-0" />
+                    <span className="text-sm font-bold">{errorMsg}</span>
+                  </motion.div>
+                )}
+
+                {/* Submit Button */}
+                <div className="pt-4 flex justify-center">
+                  <button
+                    type="submit"
+                    disabled={status === "loading"}
+                    className="group px-8 py-4 bg-foreground text-background rounded-full font-medium hover:scale-105 transition-all duration-300 flex items-center gap-2 hover:bg-electric-blue hover:text-white hover:shadow-[0_0_20px_rgba(0,85,255,0.4)] disabled:opacity-70 disabled:hover:scale-100 disabled:hover:bg-foreground disabled:hover:text-background disabled:hover:shadow-none min-w-[200px] justify-center"
+                  >
+                    {status === "loading" ? (
+                      <>
+                        <Loader2 size={18} className="animate-spin" />
+                        <span>{t.contact.form.sendingButton}</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>{t.contact.form.sendButton}</span>
+                        <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </LiquidGlassCard>
       </motion.div>

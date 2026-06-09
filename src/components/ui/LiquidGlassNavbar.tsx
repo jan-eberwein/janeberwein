@@ -4,17 +4,22 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
+import headerLogoDark from "@/../public/images/logo-dark.png";
+import headerLogoLight from "@/../public/images/logo-light.png";
 import { ThemeToggle } from "./ThemeToggle";
-
-const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "Projects", href: "/#projects" },
-  { name: "Contact", href: "/#contact" },
-];
+import { useLanguage } from "@/components/i18n/LanguageContext";
 
 export function LiquidGlassNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { name: t.nav.home, href: "/" },
+    { name: t.nav.projects, href: "/#projects" },
+    { name: t.nav.contact, href: "/#contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,15 +35,25 @@ export function LiquidGlassNavbar() {
         scrolled ? "top-2" : "top-4"
       }`}
     >
-      <nav className="liquid-glass rounded-full px-6 py-3 flex items-center justify-between w-full max-w-4xl">
+      <nav className="liquid-glass rounded-2xl px-6 py-4 flex items-center justify-between w-[95%] max-w-7xl mx-auto">
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2 group">
-          <div className="w-10 h-10 rounded-full bg-foreground/5 dark:bg-white/10 flex items-center justify-center border border-black/5 dark:border-white/5 group-hover:border-electric-blue/50 transition-colors">
-            <span className="font-bold text-lg tracking-tighter">JE</span>
-          </div>
-          <span className="font-medium hidden sm:block tracking-tight text-foreground/90 group-hover:text-electric-blue transition-colors">
-            Jan Eberwein
-          </span>
+        <Link href="/" className="flex items-center group">
+          <Image 
+            src={headerLogoDark} 
+            alt="Jan Eberwein" 
+            width={320} 
+            height={80} 
+            className="h-12 sm:h-14 w-auto object-contain hidden dark:block opacity-90 group-hover:opacity-100 transition-opacity"
+            priority
+          />
+          <Image 
+            src={headerLogoLight} 
+            alt="Jan Eberwein" 
+            width={320} 
+            height={80} 
+            className="h-12 sm:h-14 w-auto object-contain block dark:hidden opacity-90 group-hover:opacity-100 transition-opacity"
+            priority
+          />
         </Link>
 
         {/* Desktop Links */}
@@ -47,7 +62,7 @@ export function LiquidGlassNavbar() {
             <li key={link.name}>
               <Link
                 href={link.href}
-                className="text-sm font-medium text-foreground/70 hover:text-electric-blue transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-electric-blue hover:after:w-full after:transition-all after:duration-300"
+                className="text-base font-bold text-foreground/80 hover:text-electric-blue transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-electric-blue hover:after:w-full after:transition-all after:duration-300"
               >
                 {link.name}
               </Link>
@@ -57,7 +72,9 @@ export function LiquidGlassNavbar() {
 
         {/* Right Actions */}
         <div className="flex items-center space-x-4">
-          <ThemeToggle />
+          <div className="hidden md:flex items-center space-x-4">
+            <ThemeToggle />
+          </div>
           
           {/* Mobile Menu Button */}
           <button
@@ -85,11 +102,14 @@ export function LiquidGlassNavbar() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="text-lg font-medium text-foreground/80 hover:text-electric-blue transition-colors"
+                className="text-lg font-bold text-foreground/90 hover:text-electric-blue transition-colors"
               >
                 {link.name}
               </Link>
             ))}
+            <div className="pt-4 mt-2 w-full border-t border-border/50 flex justify-center space-x-6 items-center">
+              <ThemeToggle />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -2,8 +2,12 @@
 
 import { motion } from "framer-motion";
 import { LiquidGlassCard } from "@/components/ui/LiquidGlassCard";
+import Image from "next/image";
+import profilePic from "@/../CONTENTS/janwebsiteFoto.png";
+import { useLanguage } from "@/components/i18n/LanguageContext";
 
 export function AboutSection() {
+  const { t } = useLanguage();
   return (
     <section id="about" className="w-full py-24 relative">
       <motion.div
@@ -11,34 +15,33 @@ export function AboutSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.7 }}
-        className="max-w-4xl mx-auto"
+        className="w-[95%] max-w-7xl mx-auto"
       >
         <LiquidGlassCard className="p-8 md:p-12">
           <div className="flex flex-col md:flex-row gap-10 items-center md:items-start">
-            <div className="w-full md:w-2/3">
-              <h2 className="text-3xl font-bold mb-6 tracking-tight">Nice to meet you.</h2>
+            <div className="flex-1">
+              <h2 className="text-3xl font-bold mb-6 tracking-tight">{t.about.title}</h2>
               <div className="space-y-4 text-foreground/70 leading-relaxed text-lg">
                 <p>
-                  I am Jan Eberwein, currently studying Interactive Media in the Master&apos;s
-                  program. My work lies at the intersection of design and engineering.
+                  {t.about.p1}
                 </p>
                 <p>
-                  I am deeply interested in web development, creative coding, AI, interaction
-                  design, and data visualization. I enjoy building clean, useful, and visually
-                  strong projects that feel good to use.
-                </p>
-                <p>
-                  This website serves as my personal online card and portfolio, showcasing my
-                  recent experiments, academic projects, and technical skills to recruiters,
-                  clients, and collaborators.
+                  {t.about.p2}
                 </p>
               </div>
             </div>
             
-            {/* Visual element / abstract graphic in the about section */}
+            {/* Profile Photo */}
             <div className="w-full md:w-1/3 flex justify-center items-center">
-              <div className="relative w-48 h-48 rounded-full bg-gradient-to-tr from-electric-blue/20 to-transparent border border-electric-blue/30 backdrop-blur-3xl flex items-center justify-center animate-pulse duration-3000">
-                <div className="w-32 h-32 rounded-full bg-gradient-to-tr from-electric-blue/40 to-transparent blur-md"></div>
+              <div className="relative w-64 h-64 md:w-72 md:h-72 rounded-3xl overflow-hidden border border-border/50 shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(255,255,255,0.05)] group bg-background/50 backdrop-blur-sm">
+                <div className="absolute inset-0 bg-gradient-to-tr from-electric-blue/20 to-transparent mix-blend-overlay z-10 group-hover:opacity-0 transition-opacity duration-700"></div>
+                <Image 
+                  src={profilePic} 
+                  alt="Jan Eberwein" 
+                  fill
+                  className="object-cover transition-all duration-700 scale-100 group-hover:scale-105"
+                  sizes="(max-width: 768px) 256px, 288px"
+                />
               </div>
             </div>
           </div>

@@ -14,7 +14,7 @@ export function ThemeToggle() {
   }, []);
 
   if (!mounted) {
-    return <div className="w-9 h-9 rounded-full bg-white/10 dark:bg-black/10 animate-pulse" />;
+    return <div className="w-10 h-10 rounded-full bg-white/10 dark:bg-black/10 animate-pulse" />;
   }
 
   return (
@@ -23,7 +23,7 @@ export function ThemeToggle() {
       className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors text-foreground/80 hover:text-electric-blue focus:outline-none"
       aria-label="Toggle theme"
     >
-      {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+      {theme === "dark" ? <Sun size={24} /> : <Moon size={24} />}
     </button>
   );
 }

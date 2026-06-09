@@ -1,39 +1,133 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { 
+  Paintbrush, Layers, Maximize, Smartphone, MonitorPlay,
+  Bot, Terminal, Coffee, Workflow, MessageSquareText, Code2, Sparkles,
+  GitBranch, PenTool
+} from "lucide-react";
 
-const skills = [
+import reactIcon from "@/../CONTENTS/icons/react.svg";
+import nextjsIcon from "@/../CONTENTS/icons/nextjs.svg";
+import vueIcon from "@/../CONTENTS/icons/vue.svg";
+import tsIcon from "@/../CONTENTS/icons/typescript.svg";
+import tailwindIcon from "@/../CONTENTS/icons/tailwindcss.svg";
+import framerIcon from "@/../CONTENTS/icons/framer.svg";
+import d3jsIcon from "@/../CONTENTS/icons/d3js.svg";
+import nodejsIcon from "@/../CONTENTS/icons/nodejs.svg";
+import expressIcon from "@/../CONTENTS/icons/express.svg";
+import appwriteIcon from "@/../CONTENTS/icons/appwrite.svg";
+import sqliteIcon from "@/../CONTENTS/icons/sqlite.svg";
+import mariadbIcon from "@/../CONTENTS/icons/mariadb.svg";
+import threejsIcon from "@/../CONTENTS/icons/threejs.svg";
+import githubIcon from "@/../CONTENTS/icons/github.svg";
+import vercelIcon from "@/../CONTENTS/icons/vercel.svg";
+import dockerIcon from "@/../CONTENTS/icons/docker.svg";
+import openaiIcon from "@/../CONTENTS/icons/openai.svg";
+import jsIcon from "@/../CONTENTS/icons/javascript.svg";
+import phpIcon from "@/../CONTENTS/icons/php.svg";
+import cppIcon from "@/../CONTENTS/icons/cplusplus.svg";
+import railsIcon from "@/../CONTENTS/icons/rubyonrails.svg";
+import claudeIcon from "@/../CONTENTS/icons/claude.svg";
+import geminiIcon from "@/../CONTENTS/icons/googlegemini.svg";
+import swiftIcon from "@/../CONTENTS/icons/swift.svg";
+import dartIcon from "@/../CONTENTS/icons/dart.svg";
+import shadcnIcon from "@/../CONTENTS/icons/shadcnui.svg";
+import viteIcon from "@/../CONTENTS/icons/vite.svg";
+import rubyIcon from "@/../CONTENTS/icons/ruby.svg";
+import { useLanguage } from "@/components/i18n/LanguageContext";
+
+const getSkills = (t: any) => [
   {
-    category: "Frontend",
-    items: ["React", "Next.js", "Vue", "TypeScript", "Tailwind CSS", "Framer Motion", "D3.js"],
+    category: t.skills.categories.languages,
+    items: [
+      { name: "JavaScript", icon: jsIcon, href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+      { name: "TypeScript", icon: tsIcon, href: "https://www.typescriptlang.org/" },
+      { name: "C++", icon: cppIcon, href: "https://isocpp.org/" },
+      { name: "Java", lucide: Coffee, href: "https://www.java.com/" },
+      { name: "Swift", icon: swiftIcon, href: "https://developer.apple.com/swift/" },
+      { name: "Dart", icon: dartIcon, href: "https://dart.dev/" },
+      { name: "Ruby", icon: rubyIcon, href: "https://www.ruby-lang.org/" },
+      { name: "PHP", icon: phpIcon, href: "https://www.php.net/" },
+    ]
   },
   {
-    category: "Backend",
-    items: ["Node.js", "Express", "REST APIs", "Appwrite", "SQLite", "MariaDB"],
+    category: t.skills.categories.frontend,
+    items: [
+      { name: "React", icon: reactIcon, href: "https://react.dev/" },
+      { name: "Next.js", icon: nextjsIcon, invertDark: true, href: "https://nextjs.org/" },
+      { name: "Vue", icon: vueIcon, href: "https://vuejs.org/" },
+      { name: "Tailwind CSS", icon: tailwindIcon, href: "https://tailwindcss.com/" },
+      { name: "Framer Motion", icon: framerIcon, invertDark: true, href: "https://www.framer.com/motion/" },
+      { name: "D3.js", icon: d3jsIcon, href: "https://d3js.org/" },
+      { name: "shadcn/ui", icon: shadcnIcon, href: "https://ui.shadcn.com/" },
+      { name: "Vite", icon: viteIcon, href: "https://vitejs.dev/" },
+    ],
   },
   {
-    category: "Creative & Interactive",
-    items: ["Three.js", "Data Visualization", "UI/UX Design", "Prototyping", "Responsive Design", "Motion Design"],
+    category: t.skills.categories.backend,
+    items: [
+      { name: "Node.js", icon: nodejsIcon, href: "https://nodejs.org/" },
+      { name: "Express", icon: expressIcon, invertDark: true, href: "https://expressjs.com/" },
+      { name: "Ruby on Rails", icon: railsIcon, href: "https://rubyonrails.org/" },
+      { name: "Appwrite", icon: appwriteIcon, href: "https://appwrite.io/" },
+      { name: "SQLite", icon: sqliteIcon, href: "https://sqlite.org/" },
+      { name: "MariaDB", icon: mariadbIcon, invertDark: true, href: "https://mariadb.org/" },
+    ],
   },
   {
-    category: "AI & Tools",
-    items: ["AI-assisted workflows", "CopilotKit", "OpenAI API", "GitHub", "Vercel", "Docker basics"],
+    category: t.skills.categories.tools,
+    items: [
+      { name: "Git", lucide: GitBranch, href: "https://git-scm.com/" },
+      { name: "GitHub", icon: githubIcon, invertDark: true, href: "https://github.com/" },
+      { name: "Docker", icon: dockerIcon, href: "https://www.docker.com/" },
+      { name: "Vercel", icon: vercelIcon, invertDark: true, href: "https://vercel.com/" },
+      { name: "REST APIs", lucide: Terminal, href: "https://restfulapi.net/" },
+      { name: "Figma", lucide: PenTool, href: "https://www.figma.com/" },
+    ],
+  },
+  {
+    category: t.skills.categories.ai,
+    items: [
+      { name: "Agentic Coding", lucide: Code2 },
+      { name: "Prompt Refinement", lucide: Sparkles },
+      { name: "Claude", icon: claudeIcon, href: "https://anthropic.com/claude" },
+      { name: "Gemini", icon: geminiIcon, href: "https://deepmind.google/technologies/gemini/" },
+      { name: "OpenAI API", icon: openaiIcon, invertDark: true, href: "https://openai.com/" },
+      { name: "NLP Concepts", lucide: MessageSquareText },
+      { name: "AI Automations", lucide: Workflow },
+      { name: "CopilotKit", lucide: Bot, href: "https://www.copilotkit.ai/" },
+    ],
+  },
+  {
+    category: t.skills.categories.creative,
+    items: [
+      { name: "Three.js", icon: threejsIcon, invertDark: true, href: "https://threejs.org/" },
+      { name: "Data Visualization", lucide: Maximize },
+      { name: "UI/UX Design", lucide: Paintbrush },
+      { name: "Prototyping", lucide: Layers },
+      { name: "Responsive Design", lucide: Smartphone },
+      { name: "Motion Design", lucide: MonitorPlay },
+    ],
   },
 ];
 
 export function SkillsSection() {
+  const { t } = useLanguage();
+  const skills = getSkills(t);
+
   return (
-    <section className="w-full py-24">
+    <section id="skills" className="w-full py-24">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.7 }}
-        className="max-w-4xl mx-auto"
+        className="w-[95%] max-w-7xl mx-auto"
       >
-        <h2 className="text-3xl font-bold mb-12 tracking-tight text-center">Skills I bring</h2>
+        <h2 className="text-3xl font-bold mb-12 tracking-tight text-center">{t.skills.title}</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="columns-1 md:columns-2 gap-x-12">
           {skills.map((group, idx) => (
             <motion.div 
               key={group.category}
@@ -41,20 +135,56 @@ export function SkillsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="flex flex-col space-y-4"
+              className="break-inside-avoid mb-16 flex flex-col space-y-6"
             >
-              <h3 className="text-lg font-semibold text-foreground/80 border-b border-border/50 pb-2">
+              <h3 className="text-xl font-semibold text-foreground/80 border-b border-border/50 pb-3">
                 {group.category}
               </h3>
-              <div className="flex flex-wrap gap-3">
-                {group.items.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-4 py-2 rounded-full text-sm font-medium border border-border/50 bg-white/10 dark:bg-black/20 backdrop-blur-md hover:border-electric-blue/50 hover:bg-electric-blue/5 hover:text-electric-blue transition-all duration-300 cursor-default"
-                  >
-                    {skill}
-                  </span>
-                ))}
+              <div className="flex flex-wrap gap-5">
+                {group.items.map((skill) => {
+                  const content = (
+                    <>
+                      <div className="w-8 h-8 flex items-center justify-center transition-all duration-300">
+                        {skill.icon ? (
+                          <div 
+                            className="w-full h-full bg-foreground group-hover:bg-electric-blue transition-colors duration-300"
+                            style={{
+                              WebkitMaskImage: `url(${skill.icon.src})`,
+                              maskImage: `url(${skill.icon.src})`,
+                              WebkitMaskSize: "contain",
+                              WebkitMaskRepeat: "no-repeat",
+                              WebkitMaskPosition: "center",
+                            }}
+                          />
+                        ) : skill.lucide ? (
+                          <skill.lucide size={24} className="text-foreground group-hover:text-electric-blue transition-colors duration-300" />
+                        ) : null}
+                      </div>
+                      <span>{skill.name}</span>
+                    </>
+                  );
+                  
+                  const baseClasses = "flex items-center space-x-3 px-6 py-4 rounded-full text-base font-medium border border-border/50 bg-white/60 dark:bg-zinc-900/40 backdrop-blur-md hover:border-electric-blue/50 hover:shadow-[0_4px_20px_rgba(0,85,255,0.15)] hover:-translate-y-1 transition-all duration-300 group";
+
+                  return skill.href ? (
+                    <a
+                      key={skill.name}
+                      href={skill.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={baseClasses}
+                    >
+                      {content}
+                    </a>
+                  ) : (
+                    <div
+                      key={skill.name}
+                      className={`${baseClasses} cursor-default`}
+                    >
+                      {content}
+                    </div>
+                  );
+                })}
               </div>
             </motion.div>
           ))}
