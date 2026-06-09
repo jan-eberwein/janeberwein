@@ -58,29 +58,27 @@ export async function sendContactMessage(prevState: any, formData: FormData) {
 
     // Send email using Resend
     // By default Resend allows sending to the registered account email using their onboarding domain.
-    const { data, error } = await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>", 
+    const { error } = await resend.emails.send({
+      from: "Portfolio Contact <onboarding@resend.dev>",
       to: "jan@janeberwein.at",
-      subject: `New Contact Request from ${validatedData.name}`,
-      text: `Name: ${validatedData.name}\nEmail: ${validatedData.email}\n\nMessage:\n${validatedData.message}`,
+      subject: `New Message from ${validatedData.name}`,
       replyTo: validatedData.email,
+      text: `Name: ${validatedData.name}\nEmail: ${validatedData.email}\nMessage:\n${validatedData.message}`,
     });
 
-    if (error) {
-      console.error("Resend API Error:", error);
+    if (!error) {
+      return {
+        success: true,
+      };
+    } else {
       return {
         success: false,
         error: "errorMessage",
       };
     }
-
-    return {
-      success: true,
-      message: "successMessage",
-    };
   } catch (error) {
     if (error instanceof z.ZodError) {
-      console.error("Validation Error:", error.errors);
+      console.error("Validation Error:", error.issues);
       return {
         success: false,
         error: "errorMessage",
