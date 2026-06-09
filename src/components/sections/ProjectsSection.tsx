@@ -33,8 +33,10 @@ const projects = [
     title: "SNode.C Identity Provider",
     date: "Jun 2026",
     icon: ShieldCheck,
-    description:
-      "Master's thesis project focused on building a central identity provider with SSO/MFA concepts for distributed router installations.",
+    description: {
+      en: "Master's thesis project focused on building a central identity provider with SSO/MFA concepts for distributed router installations.",
+      de: "Masterarbeitsprojekt zur Entwicklung eines zentralen Identity Providers mit SSO/MFA-Konzepten für verteilte Router-Installationen.",
+    },
     tags: ["Authentication", "SSO", "MFA", "Security", "Web Architecture"],
     link: "https://auth.janeberwein.at",
     github: "https://github.com/jan-eberwein/auth",
@@ -43,8 +45,10 @@ const projects = [
     title: "Personal Learning Website",
     date: "May 2026",
     icon: GraduationCap,
-    description:
-      "A modern educational platform with interactive exercises, progress tracking, and personalized content delivery.",
+    description: {
+      en: "A modern educational platform with interactive exercises, progress tracking, and personalized content delivery.",
+      de: "Eine moderne Lernplattform mit interaktiven Übungen, Fortschrittsverfolgung und personalisierter Inhaltsbereitstellung.",
+    },
     tags: ["React", "TypeScript", "Tailwind CSS", "Vite"],
     link: "https://sophie-lernwebsite.vercel.app",
     github: "https://github.com/jan-eberwein/sophie-lernwebsite",
@@ -53,8 +57,10 @@ const projects = [
     title: "Smart Air Purifier",
     date: "Jul 2025",
     icon: Wind,
-    description:
-      "IoT project for monitoring air quality using sensors, ESP32, LoRaWAN, MQTT, MariaDB, and Grafana dashboards.",
+    description: {
+      en: "IoT project for monitoring air quality using sensors, ESP32, LoRaWAN, MQTT, MariaDB, and Grafana dashboards.",
+      de: "IoT-Projekt zur Überwachung der Luftqualität mittels Sensoren, ESP32, LoRaWAN, MQTT, MariaDB und Grafana-Dashboards.",
+    },
     tags: ["IoT", "ESP32", "LoRaWAN", "MQTT", "MariaDB", "Grafana"],
     link: "https://smart-air-purifier.vercel.app",
     github: "https://github.com/jan-eberwein/smart-air-purifier",
@@ -63,8 +69,10 @@ const projects = [
     title: "OECD Better Life Dashboard",
     date: "Jun 2025",
     icon: LineChart,
-    description:
-      "Interactive data visualization project using OECD Better Life Index data with maps, charts, radar views, rankings, and storytelling interactions.",
+    description: {
+      en: "Interactive data visualization project using OECD Better Life Index data with maps, charts, radar views, rankings, and storytelling interactions.",
+      de: "Interaktives Datenvisualisierungsprojekt mit Daten des OECD Better Life Index, inklusive Karten, Diagrammen, Radaransichten, Rankings und Storytelling-Interaktionen.",
+    },
     tags: ["D3.js", "TypeScript", "Vite", "Data Visualization", "UI Design"],
     link: "https://better-life-index-2024.vercel.app",
     github: "https://github.com/jan-eberwein/better-life-dashboard",
@@ -73,8 +81,10 @@ const projects = [
     title: "Quantum Bank",
     date: "Feb 2025",
     icon: Landmark,
-    description:
-      "AI-powered banking web application with authentication, transactions, dashboard charts, voice interaction, and CopilotKit integration.",
+    description: {
+      en: "AI-powered banking web application with authentication, transactions, dashboard charts, voice interaction, and CopilotKit integration.",
+      de: "KI-gestützte Banking-Webanwendung mit Authentifizierung, Transaktionen, Dashboard-Diagrammen, Sprachsteuerung und CopilotKit-Integration.",
+    },
     tags: [
       "Next.js",
       "React",
@@ -90,8 +100,10 @@ const projects = [
     title: "Quantum Chat",
     date: "Feb 2025",
     icon: MessageSquare,
-    description:
-      "A modern real-time messaging platform featuring secure authentication, live communication, and an intuitive, responsive user interface.",
+    description: {
+      en: "A modern real-time messaging platform featuring secure authentication, live communication, and an intuitive, responsive user interface.",
+      de: "Eine moderne Echtzeit-Messaging-Plattform mit sicherer Authentifizierung, Live-Kommunikation und einer intuitiven, responsiven Benutzeroberfläche.",
+    },
     tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     link: "https://quantum-chat-kappa.vercel.app",
     github: "https://github.com/jan-eberwein/quantum-chat",
@@ -99,7 +111,7 @@ const projects = [
 ];
 
 export function ProjectsSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <section id="projects" className="w-full py-24 relative z-10">
@@ -152,7 +164,7 @@ export function ProjectsSection() {
                     </div>
                   </div>
                   <p className="text-foreground/70 mb-6 leading-relaxed">
-                    {project.description}
+                    {project.description[language as "en" | "de"]}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-8">
                     {project.tags.map((tag) => (
