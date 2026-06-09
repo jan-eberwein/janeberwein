@@ -21,7 +21,8 @@ export function ContactSection() {
     setFieldErrors({});
     setErrorMsg("");
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
     const message = formData.get("message") as string;
@@ -43,7 +44,7 @@ export function ContactSection() {
       const result = await sendContactMessage(null, formData);
       if (result.success) {
         setStatus("success");
-        e.currentTarget.reset();
+        form.reset();
         setTimeout(() => setStatus("idle"), 5000);
       } else {
         setStatus("error");
