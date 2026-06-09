@@ -8,6 +8,7 @@ import Image from "next/image";
 import headerLogoDark from "@/../public/images/logo-dark.png";
 import headerLogoLight from "@/../public/images/logo-light.png";
 import { ThemeToggle } from "./ThemeToggle";
+import { LanguageToggle } from "./LanguageToggle";
 import { useLanguage } from "@/components/i18n/LanguageContext";
 
 export function LiquidGlassNavbar() {
@@ -82,6 +83,7 @@ export function LiquidGlassNavbar() {
         {/* Right Actions */}
         <div className="flex items-center space-x-4">
           <div className="hidden md:flex items-center space-x-4">
+            <LanguageToggle />
             <ThemeToggle />
           </div>
           
@@ -117,6 +119,7 @@ export function LiquidGlassNavbar() {
               </Link>
             ))}
             <div className="pt-4 mt-2 w-full border-t border-border/50 flex justify-center space-x-6 items-center">
+              <LanguageToggle />
               <ThemeToggle />
             </div>
           </motion.div>
