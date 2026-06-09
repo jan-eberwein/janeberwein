@@ -12,12 +12,32 @@ export function ContactSection() {
   const { t } = useLanguage();
   const email = "jan@janeberwein.at";
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [fieldErrors, setFieldErrors] = useState<{name?: string, email?: string, message?: string}>({});
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("loading");
+    setFieldErrors({});
+    setErrorMsg("");
+
     const formData = new FormData(e.currentTarget);
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const message = formData.get("message") as string;
+    
+    // Clean Frontend Validation
+    let newErrors: {name?: string, email?: string, message?: string} = {};
+    if (!name || name.trim() === "") newErrors.name = "Please enter your name";
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) newErrors.email = "Please enter a valid email address";
+    if (!message || message.trim().length < 10) newErrors.message = "Message must be at least 10 characters long";
+    
+    if (Object.keys(newErrors).length > 0) {
+      setFieldErrors(newErrors);
+      setStatus("idle");
+      return;
+    }
+
     
     try {
       const result = await sendContactMessage(null, formData);
@@ -74,11 +94,13 @@ export function ContactSection() {
                       type="text"
                       id="name"
                       name="name"
-                      required
                       disabled={status === "loading"}
                       placeholder={t.contact.form.namePlaceholder}
-                      className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border/50 focus:border-electric-blue focus:ring-1 focus:ring-electric-blue outline-none transition-all disabled:opacity-50"
+                      className={`w-full px-4 py-3 rounded-xl bg-background/50 border outline-none transition-all disabled:opacity-50 ${fieldErrors.name ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500' : 'border-border/50 focus:border-electric-blue focus:ring-1 focus:ring-electric-blue'}`}
                     />
+                    {fieldErrors.name && (
+                      <p className="text-red-500 text-xs mt-2 font-medium flex items-center gap-1"><AlertCircle size={12} /> {fieldErrors.name}</p>
+                    )}
                   </div>
                   
                   <div>
@@ -89,11 +111,13 @@ export function ContactSection() {
                       type="email"
                       id="email"
                       name="email"
-                      required
                       disabled={status === "loading"}
                       placeholder={t.contact.form.emailPlaceholder}
-                      className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border/50 focus:border-electric-blue focus:ring-1 focus:ring-electric-blue outline-none transition-all disabled:opacity-50"
+                      className={`w-full px-4 py-3 rounded-xl bg-background/50 border outline-none transition-all disabled:opacity-50 ${fieldErrors.email ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500' : 'border-border/50 focus:border-electric-blue focus:ring-1 focus:ring-electric-blue'}`}
                     />
+                    {fieldErrors.email && (
+                      <p className="text-red-500 text-xs mt-2 font-medium flex items-center gap-1"><AlertCircle size={12} /> {fieldErrors.email}</p>
+                    )}
                   </div>
                 </div>
 
@@ -104,12 +128,14 @@ export function ContactSection() {
                   <textarea
                     id="message"
                     name="message"
-                    required
                     rows={5}
                     disabled={status === "loading"}
                     placeholder={t.contact.form.messagePlaceholder}
-                    className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border/50 focus:border-electric-blue focus:ring-1 focus:ring-electric-blue outline-none transition-all resize-none disabled:opacity-50"
+                    className={`w-full px-4 py-3 rounded-xl bg-background/50 border outline-none transition-all resize-none disabled:opacity-50 ${fieldErrors.message ? 'border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500' : 'border-border/50 focus:border-electric-blue focus:ring-1 focus:ring-electric-blue'}`}
                   />
+                  {fieldErrors.message && (
+                    <p className="text-red-500 text-xs mt-2 font-medium flex items-center gap-1"><AlertCircle size={12} /> {fieldErrors.message}</p>
+                  )}
                 </div>
 
                 {/* Cloudflare Turnstile CAPTCHA */}
