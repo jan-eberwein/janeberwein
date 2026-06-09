@@ -39,7 +39,10 @@ export function HeroSection() {
           </h2>
         )}
 
-        <p className="text-lg text-foreground/60 max-w-2xl leading-relaxed mb-10" dangerouslySetInnerHTML={{ __html: t.hero.description }}>
+        <p className="hidden sm:block text-lg text-foreground/60 max-w-2xl leading-relaxed mb-10" dangerouslySetInnerHTML={{ __html: t.hero.description }}>
+        </p>
+        <p className="block sm:hidden text-lg text-foreground/60 max-w-2xl leading-relaxed mb-10">
+          Building elegant software.<br/>Helping businesses grow.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12">
