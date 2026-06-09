@@ -12,6 +12,8 @@ export const translations = {
       subtitle: "",
       description:
         "I build high-performance software and AI-driven interfaces.<br/>Focused on clean code, seamless usability, and scalable architecture.<br/>Helping businesses and individuals turn complex ideas into digital reality.",
+      mobileDescription:
+        "High Quality Software Engineering<br/>Turning complex ideas into digital reality.",
       viewProjects: "View Projects",
       getInTouch: "Contact",
     },
@@ -73,6 +75,8 @@ export const translations = {
       subtitle: "",
       description:
         "Ich entwickle performante Software und KI-gestützte Interfaces.<br/>Fokus auf sauberen Code, nahtlose Usability und skalierbare Architektur.<br/>Ich helfe Unternehmen und Menschen, komplexe Ideen in digitale Realität umzusetzen.",
+      mobileDescription:
+        "Hochwertiges Software Engineering<br/>Komplexe Ideen in digitale Realität umsetzen.",
       viewProjects: "Projekte ansehen",
       getInTouch: "Kontakt aufnehmen",
     },
