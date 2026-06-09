@@ -18,19 +18,21 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Jan Eberwein | Portfolio",
-  description: "Interactive Media Master's Student · Full-Stack Web Developer · Creative Technologist",
+  metadataBase: new URL("https://janeberwein.at"),
+  title: "JAN EBERWEIN",
+  description: "High Quality Software Engineering. I turn complex ideas into digital reality.",
+  keywords: ["Jan Eberwein", "Software Engineer", "Full-Stack Developer", "Web Developer", "IT Consultant", "Interactive Media", "Austria", "AI Interfaces"],
   openGraph: {
-    title: "Jan Eberwein | Portfolio",
-    description: "Interactive Media Master's Student · Full-Stack Web Developer · Creative Technologist",
+    title: "JAN EBERWEIN",
+    description: "High Quality Software Engineering. I turn complex ideas into digital reality.",
     url: "https://janeberwein.at",
-    siteName: "Jan Eberwein Portfolio",
+    siteName: "JAN EBERWEIN",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Jan Eberwein Portfolio",
+        alt: "JAN EBERWEIN",
       },
     ],
     locale: "en_US",
