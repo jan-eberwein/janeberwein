@@ -37,7 +37,16 @@ export function LiquidGlassNavbar() {
     >
       <nav className="liquid-glass rounded-2xl px-6 py-4 flex items-center justify-between w-[95%] max-w-7xl mx-auto">
         {/* Logo */}
-        <Link href="/" className="flex items-center group">
+        <Link 
+          href="/" 
+          onClick={(e) => {
+            if (window.location.pathname === "/") {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+          className="flex items-center group"
+        >
           <Image 
             src={headerLogoDark} 
             alt="Jan Eberwein" 
