@@ -14,11 +14,11 @@ import {
 import { Github } from "@/components/ui/Icons";
 import { useLanguage } from "@/components/i18n/LanguageContext";
 import Image, { StaticImageData } from "next/image";
-import reactIcon from "@/../CONTENTS/icons/react.svg";
-import nextjsIcon from "@/../CONTENTS/icons/nextjs.svg";
-import typescriptIcon from "@/../CONTENTS/icons/typescript.svg";
-import tailwindIcon from "@/../CONTENTS/icons/tailwindcss.svg";
-import viteIcon from "@/../CONTENTS/icons/vite.svg";
+import reactIcon from "@/../CONTENTS/Icons/react.svg";
+import nextjsIcon from "@/../CONTENTS/Icons/nextjs.svg";
+import typescriptIcon from "@/../CONTENTS/Icons/typescript.svg";
+import tailwindIcon from "@/../CONTENTS/Icons/tailwindcss.svg";
+import viteIcon from "@/../CONTENTS/Icons/vite.svg";
 
 const iconMap: Record<string, string | StaticImageData> = {
   React: reactIcon,
