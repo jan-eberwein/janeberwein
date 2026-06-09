@@ -20,11 +20,22 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: new URL("https://janeberwein.at"),
   title: "JAN EBERWEIN",
-  description: "High Quality Software Engineering. I turn complex ideas into digital reality.",
-  keywords: ["Jan Eberwein", "Software Engineer", "Full-Stack Developer", "Web Developer", "IT Consultant", "Interactive Media", "Austria", "AI Interfaces"],
+  description:
+    "High Quality Software Engineering. Turning complex ideas into digital reality.",
+  keywords: [
+    "Jan Eberwein",
+    "Software Engineer",
+    "Full-Stack Developer",
+    "Web Developer",
+    "IT Consultant",
+    "Interactive Media",
+    "Austria",
+    "AI Interfaces",
+  ],
   openGraph: {
     title: "JAN EBERWEIN",
-    description: "High Quality Software Engineering. I turn complex ideas into digital reality.",
+    description:
+      "High Quality Software Engineering. Turning complex ideas into digital reality.",
     url: "https://janeberwein.at",
     siteName: "JAN EBERWEIN",
     images: [
@@ -46,9 +57,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${outfit.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${inter.variable} ${outfit.variable} h-full antialiased`}
+    >
       <body className="min-h-full flex flex-col relative bg-background text-foreground selection:bg-electric-blue selection:text-white">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
           <LanguageProvider>
             <div className="fixed inset-0 z-[-1]">
               <BackgroundScene />
