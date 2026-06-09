@@ -71,6 +71,7 @@ export async function sendContactMessage(prevState: any, formData: FormData) {
         success: true,
       };
     } else {
+      console.error("Resend API Error:", error);
       return {
         success: false,
         error: "errorMessage",
