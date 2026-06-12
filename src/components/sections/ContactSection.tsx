@@ -28,7 +28,7 @@ export function ContactSection() {
     const message = formData.get("message") as string;
     
     // Clean Frontend Validation
-    let newErrors: {name?: string, email?: string, message?: string} = {};
+    const newErrors: {name?: string, email?: string, message?: string} = {};
     if (!name || name.trim() === "") newErrors.name = "Please enter your name";
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) newErrors.email = "Please enter a valid email address";
     if (!message || message.trim().length < 10) newErrors.message = "Message must be at least 10 characters long";
@@ -48,10 +48,10 @@ export function ContactSection() {
         setTimeout(() => setStatus("idle"), 5000);
       } else {
         setStatus("error");
-        // @ts-ignore
+        // @ts-expect-error - result.error is a string key into the form translations
         setErrorMsg(t.contact.form[result.error] || t.contact.form.errorMessage);
       }
-    } catch (err) {
+    } catch {
       setStatus("error");
       setErrorMsg(t.contact.form.errorMessage);
     }

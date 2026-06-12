@@ -36,8 +36,9 @@ import shadcnIcon from "@/../CONTENTS/Icons/shadcnui.svg";
 import viteIcon from "@/../CONTENTS/Icons/vite.svg";
 import rubyIcon from "@/../CONTENTS/Icons/ruby.svg";
 import { useLanguage } from "@/components/i18n/LanguageContext";
+import type { TranslationKey } from "@/components/i18n/translations";
 
-const getSkills = (t: any) => [
+const getSkills = (t: TranslationKey) => [
   {
     category: t.skills.categories.languages,
     items: [

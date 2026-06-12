@@ -8,8 +8,11 @@ export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Avoid hydration mismatch
+  // Avoid hydration mismatch: theme is only known on the client, so we flag
+  // mount once to swap the placeholder for the real toggle. This is the
+  // documented next-themes pattern; the synchronous setState is intentional.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 

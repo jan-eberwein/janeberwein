@@ -13,7 +13,7 @@ const contactSchema = z.object({
   cfTurnstileResponse: z.string().min(1, "CAPTCHA is required"),
 });
 
-export async function sendContactMessage(prevState: any, formData: FormData) {
+export async function sendContactMessage(prevState: unknown, formData: FormData) {
   try {
     const rawData = {
       name: formData.get("name"),

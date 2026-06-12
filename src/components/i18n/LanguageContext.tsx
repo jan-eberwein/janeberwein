@@ -17,17 +17,19 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>("en");
 
   useEffect(() => {
-    // Try to load language preference from localStorage
+    // Resolve the initial language from a saved preference, falling back to the
+    // browser language. This reads client-only APIs (localStorage/navigator),
+    // so it has to run after mount; the single setState here is intentional.
     const savedLang = localStorage.getItem("language") as Language;
-    if (savedLang && (savedLang === "en" || savedLang === "de")) {
-      setLanguage(savedLang);
-    } else {
-      // Default to browser language if available and supported
-      const browserLang = navigator.language.split("-")[0];
-      if (browserLang === "de") {
-        setLanguage("de");
-      }
-    }
+    const browserLang = navigator.language.split("-")[0];
+    const initialLang: Language =
+      savedLang === "en" || savedLang === "de"
+        ? savedLang
+        : browserLang === "de"
+          ? "de"
+          : "en";
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setLanguage(initialLang);
   }, []);
 
   const handleSetLanguage = (lang: Language) => {

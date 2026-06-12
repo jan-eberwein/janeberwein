@@ -49,6 +49,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "JAN EBERWEIN",
+    description:
+      "High Quality Software Engineering. Turning complex ideas into digital reality.",
+    images: ["/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({
