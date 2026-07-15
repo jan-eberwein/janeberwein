@@ -8,7 +8,7 @@ export const translations = {
     hero: {
       badge: "Full Stack Software Engineer & IT Consultant",
       title: "Jan Eberwein",
-      titleSuffix: ", BSc",
+      titleSuffix: ", MSc",
       subtitle: "",
       description:
         "I build high-performance software and AI-driven interfaces.<br/>Focused on clean code, seamless usability, and scalable architecture.<br/>Helping businesses and individuals turn complex ideas into digital reality.",
@@ -19,7 +19,7 @@ export const translations = {
     },
     about: {
       title: "ABOUT",
-      p1: "I am currently finishing my master's degree in Interactive Media at FH Oberösterreich - Campus Hagenberg. I combine design, code, and technology to create digital products that feel simple, useful, and carefully crafted.",
+      p1: "I recently completed my master's degree in Interactive Media at FH Oberösterreich - Campus Hagenberg. I combine design, code, and technology to create digital products that feel simple, useful, and carefully crafted.",
       p2: "My work focuses on modern frontend development, interactive systems, data visualization, and AI-supported workflows. I am interested in leveraging new technologies to solve problems and build automated, intelligent solutions.",
     },
     projects: {
@@ -71,7 +71,7 @@ export const translations = {
     hero: {
       badge: "Full Stack Software Engineer & IT Consultant",
       title: "Jan Eberwein",
-      titleSuffix: ", BSc",
+      titleSuffix: ", MSc",
       subtitle: "",
       description:
         "Ich entwickle performante Software und KI-gestützte Interfaces.<br/>Fokus auf sauberen Code, nahtlose Usability und skalierbare Architektur.<br/>Ich helfe Unternehmen und Menschen, komplexe Ideen in digitale Realität umzusetzen.",
@@ -82,7 +82,7 @@ export const translations = {
     },
     about: {
       title: "ABOUT",
-      p1: "Ich schließe gerade meinen Master in Interactive Media ab. Ich liebe es, Design, Code und Technologie zu verbinden, um digitale Produkte zu erschaffen, die sich einfach, nützlich und sorgfältig entwickelt anfühlen.",
+      p1: "Ich habe vor Kurzem meinen Master in Interactive Media abgeschlossen. Ich liebe es, Design, Code und Technologie zu verbinden, um digitale Produkte zu erschaffen, die sich einfach, nützlich und sorgfältig entwickelt anfühlen.",
       p2: "Meine Arbeit konzentriert sich auf moderne Frontend-Entwicklung, interaktive Systeme, Datenvisualisierungen und KI-gestützte Workflows. Ich interessiere mich besonders dafür, neue Technologien zur Lösung komplexer Probleme zu nutzen und automatisierte, intelligente Lösungen zu bauen.",
     },
     projects: {

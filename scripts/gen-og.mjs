@@ -56,7 +56,7 @@ const svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http
   <!-- Title -->
   <text x="600" y="380" text-anchor="middle"
         font-family="'Outfit','Helvetica Neue',Arial,sans-serif" font-size="118"
-        font-weight="800" letter-spacing="-3" fill="url(#title)">Jan Eberwein<tspan font-size="52" font-weight="500" fill="#94a3b8" dy="-6"> , BSc</tspan></text>
+        font-weight="800" letter-spacing="-3" fill="url(#title)">Jan Eberwein<tspan font-size="52" font-weight="500" fill="#94a3b8" dy="-6"> , MSc</tspan></text>
 
   <!-- Tagline -->
   <text x="600" y="452" text-anchor="middle"
