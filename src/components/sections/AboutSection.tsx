@@ -2,8 +2,6 @@
 
 import { motion } from "framer-motion";
 import { LiquidGlassCard } from "@/components/ui/LiquidGlassCard";
-import Image from "next/image";
-import profilePic from "@/../CONTENTS/janwebsiteFoto.png";
 import { useLanguage } from "@/components/i18n/LanguageContext";
 
 export function AboutSection() {
@@ -28,20 +26,6 @@ export function AboutSection() {
                 <p>
                   {t.about.p2}
                 </p>
-              </div>
-            </div>
-            
-            {/* Profile Photo */}
-            <div className="w-full md:w-1/3 flex justify-center items-center">
-              <div className="relative w-64 h-64 md:w-72 md:h-72 rounded-3xl overflow-hidden border border-border/50 shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(255,255,255,0.05)] group bg-background/50 backdrop-blur-sm">
-                <div className="absolute inset-0 bg-gradient-to-tr from-electric-blue/20 to-transparent mix-blend-overlay z-10 group-hover:opacity-0 transition-opacity duration-700"></div>
-                <Image 
-                  src={profilePic} 
-                  alt="Jan Eberwein" 
-                  fill
-                  className="object-cover transition-all duration-700 scale-100 group-hover:scale-105"
-                  sizes="(max-width: 768px) 256px, 288px"
-                />
               </div>
             </div>
           </div>
